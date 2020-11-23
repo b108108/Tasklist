@@ -18,8 +18,11 @@ export class TasklistComponent implements OnInit {
   constructor(private taskListService: TaskApiService) { }
 
   ngOnInit(): void {
-    this.taskListService.getTaskList();
-    this.taskListService.addTaskThrowInterval();
+    this.taskListService.addTaskThrowInterval().then(() => {
+      this.taskList = this.taskListService.getTaskList();
+    });
+    this.taskListService.getTaskListLS();
+    this.taskList = this.taskListService.getTaskList();
   }
 
   removeTask(task: Task, index): void {

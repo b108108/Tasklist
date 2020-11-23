@@ -71,7 +71,7 @@ export class TaskApiService {
     }, 4000);
   }
 
-  addTaskThrowInterval(): void {
+  addTaskThrowInterval(): Promise<boolean> {
     const genTask = {
       id: this.lastId,
       title: 'New task',
@@ -79,15 +79,18 @@ export class TaskApiService {
       status: Status.saving
     };
     const interval = this.getRandomArbitrary(5, 10) * 1000;
-    setInterval(() => {
-      const newObj = {};
-      for (const prop in genTask) {
-        if (genTask.hasOwnProperty(prop)) {
-          newObj[prop] = genTask[prop];
+    return new Promise((resolve, reject) => {
+      setInterval(() => {
+        const newObj = {};
+        for (const prop in genTask) {
+          if (genTask.hasOwnProperty(prop)) {
+            newObj[prop] = genTask[prop];
+          }
         }
-      }
-      this.addTaskToList(newObj);
-    }, interval);
+        this.addTaskToList(newObj);
+        resolve(true);
+      }, interval);
+    });
   }
 
   getTaskList(): Task[] {
