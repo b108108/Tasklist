@@ -26,12 +26,17 @@ export class CreatetaskComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.newTask = { id: 0, title: '', description: '', status: null };
+    this.newTask = {
+      id: 0,
+      title: '',
+      description: '',
+      status: null,
+      progress: ''
+    };
   }
 
   submit(): void {
     this.showAddNewTask = false;
-    console.log(this.addTaskForm);
     this.newTask.title = this.addTaskForm.value.titleTask;
     this.newTask.description = this.addTaskForm.value.descriptionTask;
 

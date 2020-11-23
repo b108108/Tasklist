@@ -3,6 +3,7 @@ export interface Task {
   title: string;
   status: Status;
   description: string;
+  progress: string;
 }
 
 export enum Status {

@@ -10,7 +10,6 @@ import { TaskApiService } from '../task-api.service';
 })
 export class TasklistComponent implements OnInit {
   taskList: Task[] = [];
-  // lastId = 0;
 
   isEmptyList = true;
   isShowAddNewTask = false;
@@ -18,10 +17,10 @@ export class TasklistComponent implements OnInit {
   constructor(private taskListService: TaskApiService) { }
 
   ngOnInit(): void {
-    // this.taskListService.addTaskThrowInterval().then(() => {
-    //   this.taskList = this.taskListService.getTaskList();
-    //   this.isEmptyList = this.taskListService.getEmptyList();
-    // });
+    this.taskListService.addTaskThrowInterval().then(() => {
+      this.taskList = this.taskListService.getTaskList();
+      this.isEmptyList = this.taskListService.getEmptyList();
+    });
     this.taskListService.getTaskListLS();
     this.taskList = this.taskListService.getTaskList();
     this.isEmptyList = this.taskListService.getEmptyList();

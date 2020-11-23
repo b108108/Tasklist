@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Task, Status } from '../interfaces/task';
 import { Answer } from '../interfaces/answer';
+import { Observable } from 'rxjs';
+import { CompileTemplateMetadata } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,7 @@ export class TaskApiService {
 
   constructor() { }
 
+  /* get all tasks from LocalStorage */
   getTaskListLS(): void {
     if (localStorage.getItem('TaskList').length === 0) {
       this.taskList = [];
@@ -48,10 +51,38 @@ export class TaskApiService {
     if (!isAddNew) {
       this.taskList.push(newTask);
     }
-    this.markToDo(newTask);
     localStorage.setItem('TaskList', JSON.stringify(this.taskList));
     localStorage.setItem('lastId', JSON.stringify(this.lastId));
+    this.loadProgress(newTask);
   }
+
+  /* show progress for saving new task */
+  loadProgress(task): void {
+    const progress = new Observable(this.loading);
+    progress.subscribe((data) => {
+      task.progress = data;
+      if (data === '100%') {
+        task.status = Status.todo;
+        task.progress = '';
+      }
+    });
+  }
+
+  loading(observer): void {
+    const percent = ['0%', '25%', '50%', '75%', '100%'];
+    function progress(arr, idx): void {
+      setTimeout(() => {
+        observer.next(arr[idx]);
+        if (idx === arr.length - 1) {
+          observer.complete();
+        } else {
+          progress(arr, ++idx);
+        }
+      }, 1000);
+    }
+    progress(percent, 0);
+  }
+  /****/
 
   removeTask(task: Task, index): void {
     this.taskList.splice(index, 1);
@@ -65,12 +96,7 @@ export class TaskApiService {
     task.status = task.status === 'Completed' ? Status.todo : Status.completed;
   }
 
-  markToDo(task): void {
-    setTimeout(() => {
-      task.status = Status.todo;
-    }, 4000);
-  }
-
+  /* auto add new task form 5 till 10 second */
   addTaskThrowInterval(): Promise<boolean> {
     const genTask = {
       id: this.lastId,
