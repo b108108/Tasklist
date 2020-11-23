@@ -1,0 +1,18 @@
+<div>
+  <div>Add new task</div>
+  <div>
+    <div>
+      <label>Task title:
+        <input [(ngModel)]="title" placeholder="Input task title"/>
+      </label>      
+    </div>
+    <div>
+      <label>Task description:
+        <input [(ngModel)]="description" placeholder="Input description"/>
+      </label>      
+    </div>
+    <div>
+      <button (click)="addNewTask()">Add</button>
+    </div>
+  </div>  
+</div>
