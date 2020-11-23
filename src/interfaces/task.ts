@@ -6,10 +6,10 @@ export interface Task {
 }
 
 export enum Status {
-  completed = 0,
-  todo = 1,
-  saving = 2,
-  pause = 3,
-  stop = 4,
-  edit = 5
+  completed = 'Completed',
+  todo = 'To Do',
+  saving = 'Saving',
+  pause = 'Pause',
+  stop = 'Stop',
+  edit = 'Edit'
 }
