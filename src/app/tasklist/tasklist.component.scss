@@ -1,0 +1,87 @@
+.list-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 600px;
+  box-sizing: border-box;
+}
+
+.control-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin: 20px 0;
+  height: 30px;
+}
+
+.taskslist-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 400px;
+  padding: 5px;
+  overflow: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: #f3f3f3;
+  border-radius: 5px;
+}
+
+.emptylist-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+
+.task-block {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: #f3f3f3;
+  border-radius: 5px;
+  text-align: center;
+  margin: 3px;
+  box-sizing: border-box;
+}
+
+.status-block {
+  display: flex;
+  width: 105px;
+  padding: 0 5px;
+}
+
+.titletask-block {
+  display: flex;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 5px;
+}
+
+.taskcontrol-block {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 50px;
+}
+
+.newtask-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}

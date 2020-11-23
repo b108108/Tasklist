@@ -18,11 +18,13 @@ export class TasklistComponent implements OnInit {
   constructor(private taskListService: TaskApiService) { }
 
   ngOnInit(): void {
-    this.taskListService.addTaskThrowInterval().then(() => {
-      this.taskList = this.taskListService.getTaskList();
-    });
+    // this.taskListService.addTaskThrowInterval().then(() => {
+    //   this.taskList = this.taskListService.getTaskList();
+    //   this.isEmptyList = this.taskListService.getEmptyList();
+    // });
     this.taskListService.getTaskListLS();
     this.taskList = this.taskListService.getTaskList();
+    this.isEmptyList = this.taskListService.getEmptyList();
   }
 
   removeTask(task: Task, index): void {
@@ -38,6 +40,7 @@ export class TasklistComponent implements OnInit {
       this.taskListService.addTaskToList(answer.task);
     }
     this.taskList = this.taskListService.getTaskList();
+    this.isEmptyList = this.taskListService.getEmptyList();
   }
 
   markCompleted(task, index): void {

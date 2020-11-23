@@ -1,29 +1,29 @@
-<div>
-  <div>
-    <button (click)="addNewTask({task: null, status: true})">New Task</button>
+<div class="list-wrapper">
+  <div class="control-container">
+    <button *ngIf="!isShowAddNewTask" (click)="addNewTask({task: null, status: true})">
+      Add New Task
+    </button>
+    <div *ngIf="isShowAddNewTask" class="newtask-wrapper">
+    <app-createtask [showAddNewTask]='isShowAddNewTask' (closeAddNewTask)='addNewTask($event)'></app-createtask>
   </div>
-  <div>
-    <div *ngIf="isEmptyList">
-      <span>List is empty. Please add new one.</span>
+  </div>
+  
+  <div class="taskslist-container">
+    <div *ngIf="isEmptyList" class="emptylist-block">
+      List is empty. Please add new one.
     </div>
-    <div *ngIf="!isEmptyList">
-      List of tasks:
-    </div>
-    <div>
-      <div *ngFor="let task of taskList; let ind = index">
-        <div>
-          <span>{{task.status}} --- </span>
-        </div>
-        <div>
-          <span (click)="markCompleted(task, index)">{{task.title}}</span>
-        </div>
-        <div>
-          <button (click)="removeTask(task, ind)">X</button>
-        </div>
+    <div class="task-block" *ngFor="let task of taskList; let ind = index">
+      
+      <div class="titletask-block">
+        <span  label={{task.title}}>{{task.title}}</span>
+      </div>
+      <div class="taskcontrol-block">
+        <input (click)="markCompleted(task, index)" type="checkbox"/>
+        <button (click)="removeTask(task, ind)">X</button>
+      </div>
+      <div class="status-block">
+        <span>{{task.status}}</span>
       </div>
     </div>
   </div>
-</div>
-<div *ngIf="isShowAddNewTask">
-  <app-createtask [showAddNewTask]='isShowAddNewTask' (closeAddNewTask)='addNewTask($event)'></app-createtask>
 </div>

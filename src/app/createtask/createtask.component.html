@@ -1,20 +1,19 @@
-<div>
-  <div>Add new task</div>
-
-  <form [formGroup]="addTaskForm" validate (ngSubmit)="submit()">
-    <div class="form-group">
-        <label>Task title</label>
-        <input class="form-control" name="title" formControlName="titleTask"/>
+<div class="form-wrapper">
+  <form class="form-container" [formGroup]="addTaskForm" validate (ngSubmit)="submit()">
+    <div class="form-group title-container">
+        <label class="add-label-block">Title</label>
+        <input class="form-control add-input-block" name="title" formControlName="titleTask" placeholder="Input new title"/>
     </div>
-    <div class="form-group">
-        <label>Task description</label>
-        <input class="form-control" name="description" formControlName="descriptionTask"/>
-    </div>
-    <div class="form-group">
+    <!-- <div class="form-group description-container">
+        <label class="label">Description</label>
+        <input class="form-control input" name="description" formControlName="descriptionTask"/>
+    </div> -->
+    <div class="form-group add-button-block">
         <button class="btn btn-default">
             Add
         </button>
     </div>
   </form>
 </div>
+
 

@@ -1,0 +1,48 @@
+.form-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: #f3f3f3;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.description-container {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+}
+
+.add-label-block {
+  display: flex;
+  margin: 0 5px;
+}
+
+.add-input-block {
+  display: flex;
+  width: 100%;
+}
+
+.add-button-block {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0 5px;
+}

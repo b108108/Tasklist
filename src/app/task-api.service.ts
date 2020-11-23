@@ -62,7 +62,7 @@ export class TaskApiService {
   }
 
   markCompleted(task, index): void {
-    task.status = Status.completed;
+    task.status = task.status === 'Completed' ? Status.todo : Status.completed;
   }
 
   markToDo(task): void {

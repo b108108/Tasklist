@@ -7,7 +7,7 @@ export interface Task {
 
 export enum Status {
   completed = 'Completed',
-  todo = 'To Do',
+  todo = 'In Progress',
   saving = 'Saving',
   pause = 'Pause',
   stop = 'Stop',
