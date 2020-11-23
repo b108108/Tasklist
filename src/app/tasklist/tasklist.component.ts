@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Task, Status } from '../../interfaces/task';
 import { Answer } from '../../interfaces/answer';
+import { TaskApiService } from '../task-api.service';
 
 @Component({
   selector: 'app-tasklist',
@@ -9,68 +10,35 @@ import { Answer } from '../../interfaces/answer';
 })
 export class TasklistComponent implements OnInit {
   taskList: Task[] = [];
-  lastId = 0;
+  // lastId = 0;
 
   isEmptyList = true;
   isShowAddNewTask = false;
 
-  constructor() { }
+  constructor(private taskListService: TaskApiService) { }
 
   ngOnInit(): void {
-    this.getTaskList();
-  }
-
-  getTaskList(): void {
-    if (localStorage.getItem('TaskList').length === 0) {
-      this.taskList = [];
-      this.lastId = 0;
-    } else {
-      this.taskList = JSON.parse(localStorage.getItem('TaskList'));
-      this.lastId = JSON.parse(localStorage.getItem('lastId'));
-    }
-    this.isEmptyList = this.taskList.length > 0 ? false : true;
-    this.lastId = this.taskList.length;
-  }
-
-  changeStatus(task: Task): void {
-    // this.task = task;
+    this.taskListService.getTaskList();
+    this.taskListService.addTaskThrowInterval();
   }
 
   removeTask(task: Task, index): void {
-    this.taskList.splice(index, 1);
-    localStorage.setItem('TaskList', JSON.stringify(this.taskList));
-    if (this.taskList.length === 0) {
-      this.isEmptyList = true;
-    }
+    this.taskListService.removeTask(task, index);
+    this.isEmptyList = this.taskListService.getEmptyList();
+    this.taskList = this.taskListService.getTaskList();
   }
 
   addNewTask(answer: Answer): void {
     this.isShowAddNewTask = answer.status;
+    this.taskListService.setShowAddNewTask(this.isShowAddNewTask);
     if (answer && answer.task && answer.task.title !== '') {
-      this.addTaskToList(answer.task);
+      this.taskListService.addTaskToList(answer.task);
     }
-  }
-
-  addTaskToList(newTask): void {
-    let isAddNew = false;
-    newTask.id = this.lastId++;
-    newTask.status = Status.saving;
-    this.isEmptyList = false;
-    for (let i = 0; i < this.taskList.length; i++) {
-      if (this.taskList[i].title < newTask.title) {
-        this.taskList.splice(i, 0, newTask);
-        isAddNew = true;
-        break;
-      }
-    }
-    if (!isAddNew) {
-      this.taskList.push(newTask);
-    }
-    localStorage.setItem('TaskList', JSON.stringify(this.taskList));
-    localStorage.setItem('lastId', JSON.stringify(this.lastId));
+    this.taskList = this.taskListService.getTaskList();
   }
 
   markCompleted(task, index): void {
-    task.status = Status.completed;
+    this.taskListService.markCompleted(task, index);
+    this.taskList = this.taskListService.getTaskList();
   }
 }

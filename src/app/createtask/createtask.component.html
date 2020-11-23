@@ -1,18 +1,20 @@
 <div>
   <div>Add new task</div>
-  <div>
-    <div>
-      <label>Task title:
-        <input [(ngModel)]="title" placeholder="Input task title"/>
-      </label>      
+
+  <form [formGroup]="addTaskForm" validate (ngSubmit)="submit()">
+    <div class="form-group">
+        <label>Task title</label>
+        <input class="form-control" name="title" formControlName="titleTask"/>
     </div>
-    <div>
-      <label>Task description:
-        <input [(ngModel)]="description" placeholder="Input description"/>
-      </label>      
+    <div class="form-group">
+        <label>Task description</label>
+        <input class="form-control" name="description" formControlName="descriptionTask"/>
     </div>
-    <div>
-      <button (click)="addNewTask()">Add</button>
+    <div class="form-group">
+        <button class="btn btn-default">
+            Add
+        </button>
     </div>
-  </div>  
+  </form>
 </div>
+
